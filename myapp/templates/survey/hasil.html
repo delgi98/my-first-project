@@ -1,0 +1,59 @@
+{% extends 'base.html' %} 
+{% block Title %} {{title }} {% endblock Title %}
+
+
+{% block hasil %}
+<div class="row text-bg-secondary rounded mt-3 text-center"><legend>{{ pertanyaan.pertanyaan_text }}</legend> </div>
+<div class="row">
+    <div class="col m-3 bg-body-secondary shadow pt-4 rounded">
+        <ul class="list-group">
+	        {% for pilihan in pertanyaan.pilihan_set.all %} 
+	          <li class="mb-2 list-group-item d-flex justify-content-between align-items-center">
+		         {{ pilihan.pilihan_text }}
+		         <span class="badge text-bg-success bg-gradient">
+			        {{ pilihan.votes }} vote{{ pilihan.votes|pluralize }}
+		         </span>
+	          </li>
+	        {% endfor %}
+        </ul>
+    </div>
+
+    <div class="col m-3 bg-body-secondary shadow rounded">
+        <div class="chart-container" style="position: relative; height:40vh; width:40vw"> 
+            <canvas id="chart"></canvas>
+        </div> 
+    </div>
+    <a href="{% url 'myapp:home' %}" class="btn btn-secondary stretched-link">Kembali untuk Pertanyaan selanjutnya</a>
+</div>
+
+<script>
+  const ctx = document.getElementById('chart');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [{% for opsi in pertanyaan.pilihan_set.all %} '{{ opsi.pilihan_text }}', {% endfor %}], 
+      datasets: [{
+        label: '{{ pertanyaan.pertanyaan_text }}',
+        data: [ {% for vote in pertanyaan.pilihan_set.all %} {{ vote.votes }}, {% endfor %}],
+        backgroundColor: [
+            'rgba(75, 192, 192, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(255, 99, 132, 1)',
+            
+        ],
+        borderWidth: 2
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      },
+      maintainAspectRatio: false
+    }
+  });
+</script>
+{% endblock %}
+

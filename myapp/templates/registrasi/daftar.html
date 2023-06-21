@@ -1,0 +1,32 @@
+{% extends 'base.html' %} 
+{% load widget_tweaks %}
+
+{% block Title %} {{title }} {% endblock Title %}
+
+
+{% block autentikasi %}
+<div class="bg-body-secondary rounded mt-3">
+  <legend class="text-center">Daftar</legend>
+  <form action="" method="POST">
+	{% csrf_token %}
+	<div class="form-control bg-body-secondary rounded ">
+         <div class="form-group p-2">
+            {% render_field daftar_form.username class="form-control" placeholder=daftar_form.username.label type="text" %}
+        </div>
+         <div class="form-group p-2">
+            {% render_field daftar_form.nim class="form-control" placeholder="NIM" type="number" %}
+        </div>
+         <div class="form-group p-2">
+            {% render_field daftar_form.password1 class="form-control" placeholder=daftar_form.password1.label type="password" %}
+        </div>
+        <div class="form-group p-2">
+            {% render_field daftar_form.password2 class="form-control" placeholder=daftar_form.password2.label type="password" %}
+        </div>
+	</div>
+    <div class="d-grid gap-2 col-6 mx-auto p-2 mb-2">
+        <button class="btn btn-outline-secondary mb-3" type="submit">kirim</button>
+    </div>
+  </form>
+</div>
+{% endblock %}
+

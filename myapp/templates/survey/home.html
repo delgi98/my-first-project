@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block Title %} {{ title }} {% endblock Title %}
+
+
+{% block quisioner %}
+<div class="bg-body-secondary mt-3">
+ {% if daftar_pertanyaan %}
+    <div class="list-group">
+        {% for pertanyaan in daftar_pertanyaan %}
+            <a href="{% url 'myapp:rincian' pertanyaan.id %}" class="list-group-item list-group-item-action mb-2 btn btn-outline-success">{{ pertanyaan.pertanyaan_text }}</a>
+        {% endfor %}
+    </div>
+ {% else %}
+    <p>tidak ada pertanyaan tersedia</p>
+ {% endif %}
+</div>
+{% endblock %}
+
+<!-------------------------------------------------------->
+
