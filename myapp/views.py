@@ -55,7 +55,7 @@ def login_respondent(request):
         else:
             messages.error(
                 request,
-                "data yang anda masukkan tidak ada di database kami silahkan daftar ulang stau coba lagi",
+                "data yang anda masukkan tidak ada di database silahkan daftar ulang stau coba lagi",
             )
     form = AuthenticationForm()
     title = "Login"
@@ -89,7 +89,7 @@ def rincian(request, pertanyaan_id):
     title = "Rincian"
     pertanyaan = get_object_or_404(Pertanyaan, pk=pertanyaan_id)
     context = {
-        "title"     : title,
+        "title": title,
         "pertanyaan": pertanyaan,
     }
     return render(request, "survey/rincian.html", context)
@@ -97,9 +97,13 @@ def rincian(request, pertanyaan_id):
 
 def hasil(request, pertanyaan_id):
     title = "Hasil"
+    jumlah_pertanyaan = Pertanyaan.objects.all().count()
+    total_respondent  = User.objects.all().count()
     pertanyaan = get_object_or_404(Pertanyaan, pk=pertanyaan_id)
     context = {
-        "title"     : title,
+        "title": title,
+        "jumlah_pertanyaan": jumlah_pertanyaan,
+        "total_respondent":total_respondent,
         "pertanyaan": pertanyaan,
     }
     return render(request, "survey/hasil.html", context)
