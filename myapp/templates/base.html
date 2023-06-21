@@ -70,7 +70,13 @@
         <div class="container px-3">
             {% block hasil %}{% endblock %}
         </div>
-         {% endif %}
+    {% else %}
+         <div class="container alert alert-danger alert-dismissible fade show shadow-lg" role="alert">
+            <strong>Silahkan <a href="{% url 'myapp:login' %}">login</a> untuk memulai</strong> 
+            
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
         {% comment %} Basis Content dashboard {% endcomment %}
 	</body>
 </html>
