@@ -4,6 +4,26 @@
 
 {% block hasil %}
 <div class="row text-bg-secondary rounded mt-3 text-center"><legend>{{ pertanyaan.pertanyaan_text }}</legend> </div>
+{% comment "content informasi data" %}{% endcomment %}
+<div class="row justify-content-evenly">
+  <div class="col-4">
+    <div class="card text-center text-bg-info rounded m-2 shadow" style="max-width: 12rem;">
+      <div class="card-body">
+        <h6 class="card-title">Total Respondent</h6>
+        <h4 class="card-text">{{ total_respondent }}</h4>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="card text-center text-bg-info rounded m-2 shadow " style="max-width: 12rem;">
+      <div class="card-body">
+        <h6 class="card-title">Total Pertanyaan</h6>
+        <h4 class="card-text">{{ jumlah_pertanyaan }}</h4>
+      </div>
+    </div>
+  </div>
+</div>
+{% comment "akhir content informasi data" %}{% endcomment %}
 <div class="row">
     <div class="col m-3 bg-body-secondary shadow pt-4 rounded">
         <ul class="list-group">
